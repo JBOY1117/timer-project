@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChronoGlass | Timer & Stopwatch</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="dark">
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+
+    <header class="app-header">
+        <div class="header-left">
+            <i class="fa-solid fa-clock"></i>
+            <span id="live-datetime" aria-live="polite">Loading...</span>
+        </div>
+        <div class="header-right">
+            <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">
+                <i class="fa-solid fa-sun"></i>
+            </button>
+            <button id="fullscreen-toggle" class="icon-btn" aria-label="Toggle Fullscreen">
+                <i class="fa-solid fa-expand"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="glass-container">
+        <!-- Tabs -->
+        <nav class="tabs">
+            <button class="tab-btn active" data-target="stopwatch-view" aria-label="Stopwatch Tab">Stopwatch</button>
+            <button class="tab-btn" data-target="timer-view" aria-label="Timer Tab">Timer</button>
+        </nav>
+
+        <!-- Stopwatch View -->
+        <section id="stopwatch-view" class="view active">
+            <div class="display-container">
+                <div id="sw-display" class="digital-display" aria-live="polite">00:00:00<span class="ms">.00</span></div>
+            </div>
+            
+            <div class="controls">
+                <button id="sw-start-pause" class="btn primary-btn" aria-label="Start Stopwatch">
+                    <i class="fa-solid fa-play"></i> Start
+                </button>
+                <button id="sw-lap" class="btn secondary-btn" disabled aria-label="Record Lap">
+                    <i class="fa-solid fa-flag"></i> Lap
+                </button>
+                <button id="sw-reset" class="btn danger-btn" disabled aria-label="Reset Stopwatch">
+                    <i class="fa-solid fa-rotate-right"></i> Reset
+                </button>
+            </div>
+
+            <div class="laps-container">
+                <div class="laps-header">
+                    <span>Lap</span>
+                    <span>Lap Time</span>
+                    <span>Overall Time</span>
+                </div>
+                <ul id="laps-list" aria-label="List of lap times">
+                    <!-- Laps injected here -->
+                </ul>
+            </div>
+        </section>
+
+        <!-- Timer View -->
+        <section id="timer-view" class="view">
+            <div class="progress-container">
+                <!-- SVG Progress Ring -->
+                <svg class="progress-ring" width="300" height="300">
+                    <circle class="progress-ring-bg" stroke-width="8" fill="transparent" r="140" cx="150" cy="150"/>
+                    <circle class="progress-ring-circle" stroke-width="8" fill="transparent" r="140" cx="150" cy="150"/>
+                </svg>
+                
+                <div class="timer-inputs-display">
+                    <!-- Input Mode -->
+                    <div id="timer-inputs" class="inputs-group">
+                        <div class="input-col">
+                            <input type="number" id="t-hours" min="0" max="99" value="00" aria-label="Hours">
+                            <label>h</label>
+                        </div>
+                        <span class="colon">:</span>
+                        <div class="input-col">
+                            <input type="number" id="t-minutes" min="0" max="59" value="05" aria-label="Minutes">
+                            <label>m</label>
+                        </div>
+                        <span class="colon">:</span>
+                        <div class="input-col">
+                            <input type="number" id="t-seconds" min="0" max="59" value="00" aria-label="Seconds">
+                            <label>s</label>
+                        </div>
+                    </div>
+                    <!-- Running Display Mode -->
+                    <div id="timer-display" class="digital-display hidden" aria-live="polite">
+                        00:05:00
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="t-start-pause" class="btn primary-btn" aria-label="Start Timer">
+                    <i class="fa-solid fa-play"></i> Start
+                </button>
+                <button id="t-reset" class="btn danger-btn" aria-label="Reset Timer">
+                    <i class="fa-solid fa-stop"></i> Stop
+                </button>
+            </div>
+        </section>
+
+        <div class="keyboard-shortcuts">
+            <span><kbd>Space</kbd> Start/Pause</span>
+            <span><kbd>L</kbd> Lap</span>
+            <span><kbd>R</kbd> Reset</span>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
